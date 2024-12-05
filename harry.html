@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado: Harry Potter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Você tem personalidade semelhante ao Harry Potter!</h1>
+    
+    <img src="img/harry.jpg" alt="Harry Potter">
+    
+    <h2 id="resultado-porcentagem"></h2>
+    
+    <p>Você possui muitas características que fazem de você uma pessoa única, e sua semelhança com Harry Potter é impressionante. Assim como ele, você é alguém com um senso de responsabilidade enorme e uma coragem inabalável. Você se destaca por sua capacidade de proteger aqueles que ama e sempre lutar por uma causa justa.</p>
+
+    <p>Harry Potter não é apenas um herói porque tem coragem, mas porque ele nunca desiste, mesmo quando o mundo inteiro parece estar contra ele. Sua vida foi marcada por desafios desde muito cedo, e você também tem a capacidade de se levantar após cada queda, sempre com determinação e força. Assim como Harry, você não tem medo de se sacrificar para o bem maior.</p>
+
+    <p>Você é uma pessoa que valoriza a amizade acima de tudo. Harry sempre esteve cercado por amigos leais, como Ron e Hermione, e você também tem um círculo de pessoas que confiam em você e que sabem que podem contar com você em qualquer momento. Sua empatia e compaixão pelos outros tornam você alguém com quem as pessoas se sentem à vontade, e sua presença transmite segurança e proteção.</p>
+
+    <p>Mesmo quando o medo parece avassalador, você encara seus desafios com a mesma força que Harry mostrou em suas maiores batalhas. Seu espírito indomável e sua habilidade de tomar decisões difíceis em momentos de grande pressão o tornam um líder natural. Seu compromisso com a justiça, mesmo quando a situação parece sem saída, é o que o torna tão especial.</p>
+
+    <button onclick="window.location.href='index.html'">Voltar ao Quiz</button>
+
+    <div id="outras-porcentagens" style="margin-top: 1px;">
+      <h3>Semelhança com outros personagens:</h3>
+      <p>Voldemort: <span id="voldemort-porcentagem"></span></p>
+      <p>Dobby: <span id="dobby-porcentagem"></span></p>
+      <p>Cedrico Diggory: <span id="cedrico-porcentagem"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const porcentagens = JSON.parse(localStorage.getItem('porcentagens'));
+    document.getElementById('resultado-porcentagem').textContent = 
+      `Você tem ${porcentagens.harry.toFixed(2)}% de semelhança com Harry Potter!`;
+    document.getElementById('voldemort-porcentagem').textContent = `${porcentagens.voldemort.toFixed(2)}%`;
+    document.getElementById('dobby-porcentagem').textContent = `${porcentagens.dobby.toFixed(2)}%`;
+    document.getElementById('cedrico-porcentagem').textContent = `${porcentagens.cedrico.toFixed(2)}%`;
+  </script>
+</body>
+</html>

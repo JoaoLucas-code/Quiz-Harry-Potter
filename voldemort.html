@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado: Voldemort</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Você tem personalidade semelhante ao Voldemort!</h1>
+    
+    <img src="img/voldemort.jpg" alt="Voldemort">
+    
+    <h2 id="resultado-porcentagem"></h2>
+    
+    <p>Você é uma pessoa ambiciosa e determinada, com um desejo intenso de atingir seus objetivos. Assim como Voldemort, você possui um intelecto afiado e é altamente estratégico, sempre pensando em seus próximos passos. Sua força está na sua habilidade de influenciar situações ao seu favor.</p>
+
+    <p>Embora essa determinação seja uma qualidade notável, tome cuidado para que isso não prejudique suas relações com os outros. Assim como Tom Riddle, o equilíbrio entre poder e empatia é essencial para evitar que suas ambições o afastem das pessoas ao seu redor.</p>
+
+    <p>Você não teme desafios e está disposto a enfrentar qualquer obstáculo que esteja no seu caminho. Seu senso de controle e capacidade de planejar são características que o tornam único e poderoso, mas lembre-se sempre de considerar a perspectiva de outras pessoas em sua jornada.</p>
+
+    <button onclick="window.location.href='index.html'">Voltar ao Quiz</button>
+
+    <div id="outras-porcentagens" style="margin-top: 1px;">
+      <h3>Semelhança com outros personagens:</h3>
+      <p>Harry Potter: <span id="harry-porcentagem"></span></p>
+      <p>Dobby: <span id="dobby-porcentagem"></span></p>
+      <p>Cedrico Diggory: <span id="cedrico-porcentagem"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const porcentagens = JSON.parse(localStorage.getItem('porcentagens'));
+    document.getElementById('resultado-porcentagem').textContent = 
+      `Você tem ${porcentagens.voldemort.toFixed(2)}% de semelhança com Voldemort!`;
+    document.getElementById('harry-porcentagem').textContent = `${porcentagens.harry.toFixed(2)}%`;
+    document.getElementById('dobby-porcentagem').textContent = `${porcentagens.dobby.toFixed(2)}%`;
+    document.getElementById('cedrico-porcentagem').textContent = `${porcentagens.cedrico.toFixed(2)}%`;
+  </script>
+</body>
+</html>

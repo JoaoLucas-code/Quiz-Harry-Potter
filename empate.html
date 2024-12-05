@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empate entre Personagens</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Você tem a personalidade desses personagens: </h1>
+
+    <div id="imagens-empate"></div>
+
+    <h2 id="porcentagens-empate"></h2>
+
+    <div id="desc-empate"></div>
+
+    <button onclick="window.location.href='index.html'">Voltar ao Quiz</button>
+
+    <div id="outras-porcentagens">
+      <h3>Semelhança com outro(s) personagem(ns) :</h3>
+      <p id="harry-porcentagem">Harry Potter: <span></span></p>
+      <p id="voldemort-porcentagem">Voldemort: <span></span></p>
+      <p id="dobby-porcentagem">Dobby: <span></span></p>
+      <p id="cedrico-porcentagem">Cedrico Diggory: <span></span></p>
+    </div>
+  </div>
+
+  <script>
+    const porcentagens = JSON.parse(localStorage.getItem('porcentagens'));
+
+    const sortedPorcentagens = Object.entries(porcentagens).sort((a, b) => b[1] - a[1]);
+    const maxPercentage = sortedPorcentagens[0][1];
+    const empate = sortedPorcentagens.filter(([_, value]) => value === maxPercentage);
+
+    const personagens = {
+      harry: { nome: "Harry Potter", descricao: "Assim como Harry, você é alguém com um senso de responsabilidade enorme e uma coragem inabalável. Você se destaca por sua capacidade de proteger aqueles que ama e sempre lutar por uma causa justa.", imagem: "img/harry.jpg" },
+      voldemort: { nome: "Voldemort", descricao: "Assim como Voldemort, você possui um intelecto afiado e é altamente estratégico, sempre pensando em seus próximos passos. Sua força está na sua habilidade de influenciar situações ao seu favor.", imagem: "img/voldemort.jpg" },
+      dobby: { nome: "Dobby", descricao: "Assim como Dobby, você coloca o bem-estar dos outros acima do seu e não mede esforços para garantir que todos ao seu redor estejam seguros e felizes.", imagem: "img/dobby.jpg" },
+      cedrico: { nome: "Cedrico Diggory", descricao: "Assim como Cedrico, você valoriza o trabalho árduo e acredita que o sucesso é resultado de esforço e dedicação. Sua ética e caráter fazem com que todos ao seu redor o respeitem profundamente.", imagem: "img/cedrico.jpg" }
+    };
+
+    const imagensContainer = document.getElementById('imagens-empate');
+    const descricaoContainer = document.getElementById('desc-empate');
+    const porcentagensEmpateContainer = document.getElementById('porcentagens-empate');
+
+    let porcentagensTexto = [];
+    empate.forEach(([personagem, _], index) => {
+      const img = document.createElement('img');
+      img.src = personagens[personagem].imagem;
+      img.alt = personagens[personagem].nome;
+      img.style.maxWidth = '400px';
+      imagensContainer.appendChild(img);
+
+      const descricao = document.createElement('div');
+      descricao.innerHTML = `<strong>${personagens[personagem].nome}</strong>: ${personagens[personagem].descricao}`;
+      descricaoContainer.appendChild(descricao);
+
+      porcentagensTexto.push(`${porcentagens[personagem].toFixed(2)}% ${personagens[personagem].nome}`);
+    });
+
+    let porcentagensFrase = "";
+    if (empate.length > 1) {
+      porcentagensFrase = `Você é ${porcentagensTexto.slice(0, -1).join(', ')} e ${porcentagensTexto[porcentagensTexto.length - 1]}.`;
+    } else {
+      porcentagensFrase = `Você é ${porcentagensTexto[0]}.`;
+    }
+
+    porcentagensEmpateContainer.innerHTML = porcentagensFrase;
+
+    Object.entries(porcentagens).forEach(([personagem, porcentagem]) => {
+      if (!empate.some(([empPersonagem]) => empPersonagem === personagem)) {
+        document.getElementById(`${personagem}-porcentagem`).querySelector('span').textContent = `${porcentagem.toFixed(2)}%`;
+      } else {
+        document.getElementById(`${personagem}-porcentagem`).style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
